@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Random Number Updater</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+            background-color: #f0f0f0;
+        }
+
+        #number {
+            font-size: 60px;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .box {
+            display: inline-block;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>Live Random Number</h1>
+        <div id="number">Loading...</div>
+    </div>
+
+    <script>
+        async function fetchNumber() {
+            const response = await fetch('/random-number');
+            const data = await response.json();
+            document.getElementById('number').textContent = data.number;
+        }
+
+        // Fetch number immediately and then every 3 seconds
+        fetchNumber();
+        setInterval(fetchNumber, 3000);
+    </script>
+</body>
+</html>
