@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, render_template
-import random
 
 app = Flask(__name__)
+counter = 0  # Global variable to store the counter
 
 @app.route('/')
 def index():
@@ -9,8 +9,9 @@ def index():
 
 @app.route('/random-number')
 def random_number():
-    number = random.randint(1, 1000)
-    return jsonify({'number': number})
+    global counter
+    counter += 1
+    return jsonify({'number': counter})
 
 if __name__ == '__main__':
     app.run(debug=True)
